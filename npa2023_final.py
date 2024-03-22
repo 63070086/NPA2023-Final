@@ -21,7 +21,7 @@ accessToken = "Bearer MzE0YjcyMjktMGRmZC00MGFkLTg2ZWUtMWVmMWUxYzExZDc0ZWEyMzVkMT
 
 # Defines a variable that will hold the roomId
 roomIdToGetMessages = (
-    "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNzVmNGE1YjAtZTdhZC0xMWVlLWIyNjEtNDczYWNhMmVjYzEy"
+    "Y2lzY29zcGFyazovL3VzL1JPT00vZjBkZjY0NDAtYWU5Yi0xMWVlLTg5MGMtMGQzNjUwOTJlMmUy"
 )
 
 # room test
@@ -111,7 +111,7 @@ while True:
             data=json.dumps(postData),
             headers=postHTTPHeaders,
         )
-        
+
         if not r.status_code == 200:
             raise Exception(
                 "Incorrect reply from Webex Teams API. Status code: {}".format(r.status_code)
