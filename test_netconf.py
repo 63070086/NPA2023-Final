@@ -36,7 +36,6 @@ def create():
     except:
         print("Error!")
 
-
 def delete():
     netconf_config = """
     <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -57,7 +56,6 @@ def delete():
     except:
         print("Error!")
 
-
 def enable():
     netconf_config = """<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
         <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
@@ -76,7 +74,6 @@ def enable():
             return "Interface loopback 63070086 is enabled successfully"
     except:
         print("Error!")
-
 
 def disable():
     netconf_config = """<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -100,7 +97,6 @@ def disable():
 
 def netconf_edit_config(netconf_config):
     return  m.edit_config(target="running", config=netconf_config)
-
 
 def status():
     netconf_filter = """<filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
