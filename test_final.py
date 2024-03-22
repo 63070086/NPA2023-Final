@@ -22,7 +22,7 @@ while True:
     getParameters = {"roomId": roomIdToGetMessages, "max": 1}
 
     getHTTPHeader = {"Authorization": accessToken}
-                     
+
     r = requests.get(
         "https://webexapis.com/v1/messages",
         params=getParameters,
@@ -33,12 +33,12 @@ while True:
         raise Exception(
             "Incorrect reply from Webex Teams API. Status code: {}".format(r.status_code)
         )
-    
+
     json_data = r.json()
 
     if len(json_data["items"]) == 0:
         raise Exception("There are no messages in the room.")
-    
+
     messages = json_data["items"]
 
     message = messages[0]["text"]
@@ -49,7 +49,7 @@ while True:
         # extract the command
         command = message[message.find(" ")+1:]
         print(command)
-    
+
         if command == "create":
             responseMessage =  test_netconf.create()
         elif command == "delete":
@@ -64,7 +64,7 @@ while True:
             responseMessage = "Error: No command or unknown command"
 
         postHTTPHeaders = HTTPHeaders = {"Authorization": accessToken, "Content-Type": "application/json"}
-                                         
+
         postData = {"roomId": roomIdToGetMessages, "text": responseMessage}
 
         r = requests.post(
