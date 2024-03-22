@@ -130,3 +130,34 @@ def status():
             return "No Interface loopback 63070086"
     except:
        print("Error!")
+
+def check_loop():
+    # Define the NETCONF filter to retrieve the interface configuration
+    netconf_filter = """
+    <filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+        <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+            <interface>
+                <name>Loopback63070086</name>
+            </interface>
+        </interfaces>
+    </filter>
+    """
+
+    try:
+        # Retrieve the interface configuration
+        netconf_reply = m.get_config(source="running", filter=netconf_filter)
+        xml_data = netconf_reply.xml
+        print(xml_data)
+
+        # Check if the interface already exists
+        if '<ok/>' in xml_data:
+            return "Interface loopback 63070086 already exists"
+        else:
+            # Create the interface if it does not exist
+            netconf_reply_create = netconf_edit_config(netconf_config)
+            xml_data_create = netconf_reply_create.xml
+            print(xml_data_create)
+            if '<ok/>' in xml_data_create:
+                return "Interface loopback 63070086 is created successfully"
+    except Exception as e:
+        print("Error:", e)
